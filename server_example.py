@@ -17,6 +17,12 @@ class Win(QWidget):
 
         self.server = InputServer("192.168.1.12",5050,self)
 
+        self.server.load_action_A.connect(self.server.load_action_B)
+        self.server.hide_A.connect(self.server.get_input_B)
+        self.server.hide_job_A.connect(self.server.get_input_B)
+        self.server.get_input_A.connect(self.server.get_input_B)
+        self.server.get_picture_A.connect(self.server.get_picture_B)
+
 
 if __name__ == "__main__":
     app = QApplication([])

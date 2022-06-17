@@ -7,39 +7,6 @@ from PySide2.QtWidgets import QApplication,QWidget
 from PySide2.QtCore import QFile, QThread, QObject, Signal, QIODevice,QByteArray,QDataStream
 import sys
 
-# class TCPServer(QTcpServer):
-#
-#     def __init__(self,port,address = None):
-#         super(TCPServer, self).__init__()
-#
-#         if address == None:
-#             self.address = self.get_ip()
-#         else:
-#             self.address = QHostAddress (str(address))
-#
-#         self.port = port
-#
-#
-#     def get_ip(self):
-#         network = QNetworkInterface()
-#
-#         addr_list = network.allAddresses()
-#
-#
-#         for i in addr_list:
-#             if i.toIPv4Address() and i != QHostAddress.LocalHost:
-#                 addr = i
-#                 break
-#
-#         return addr
-#
-#
-#
-#     def handle_connexion(self,data):
-#         print("new tcp connexion")
-#         print(data)
-
-
 class TCPServer(QTcpServer):
     clientReadyToRead = Signal()
     clientDisconnected = Signal()
