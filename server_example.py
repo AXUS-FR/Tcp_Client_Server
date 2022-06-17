@@ -21,7 +21,7 @@ class Win(QWidget):
         self.server.hide_A.connect(self.server.get_input_B)
         self.server.hide_job_A.connect(self.server.get_input_B)
         self.server.get_input_A.connect(self.server.get_input_B)
-        self.server.get_picture_A.connect(self.server.get_picture_B)
+        self.server.get_picture_A.connect(self.server._test_picture)
 
 
 if __name__ == "__main__":

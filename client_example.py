@@ -43,6 +43,7 @@ class Win(QWidget):
         self.ui.button_raw.clicked.connect(self.send_raw)
 
         self.ui.b1.clicked.connect(self.client.load_action)
+        self.ui.b2.clicked.connect(self.client.get_picture)
 
 
 

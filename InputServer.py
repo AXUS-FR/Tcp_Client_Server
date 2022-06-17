@@ -30,7 +30,7 @@ class InputServer(TCPServer):
     hide_A = Signal()
     hide_job_A = Signal()
     get_input_A = Signal()
-    get_picture_A = Signal()
+    get_picture_A = Signal(object)
 
     def __init__(self, address, port, parent = None):
         TCPServer.__init__(self, address, port, parent)
@@ -49,7 +49,7 @@ class InputServer(TCPServer):
                 job_id = packet.signal_arg[0]
                 bar_id = packet.signal_arg[1]
                 self.state = 102
-                self.hide_A.emit(job_id,bar_id)
+                self.hide_A.emit([job_id,bar_id])
 
             elif packet.signal_id == 103:
                 job_id = packet.signal_arg[0]
@@ -64,7 +64,8 @@ class InputServer(TCPServer):
                 maker = packet.signal_arg[0]
                 ref = packet.signal_arg[1]
                 self.state = 105
-                self.get_picture_A.emit(maker, ref)
+                self.get_picture_A.emit([maker, ref])
+
 
             else:  # ----- return packet in case we don't handle
                 self.handle_answer(packet)
@@ -93,6 +94,17 @@ class InputServer(TCPServer):
         if self.state == 105:
 
             self.state = None
-            self.send_packet(packet)
+            self.send(packet)
         else:
             print("server is not waiting for picture send")
+
+    # --------------------- ONLY FOR TEST, NEED TO IMPLEMENT ---------------
+
+    def _test_picture(self,a):
+        print(a)
+
+        packet = Packet(0,[0])
+        packet.wrap_picture("image1.PNG")
+        self.get_picture_B(packet)
+
+    # ------------------------------------------------------------------------
